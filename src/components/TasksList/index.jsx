@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
-import propTypes from 'prop-types';
 
 function TaskList({ title, tasks }) {
   return (
@@ -26,7 +25,7 @@ function TaskList({ title, tasks }) {
 
 TaskList.propTypes = {
   title: PropTypes.string.isRequired,
-  tasks: PropTypes.arrayOf(propTypes.shape({
+  tasks: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     checked: PropTypes.bool.isRequired,
     id: PropTypes.number.isRequired,
