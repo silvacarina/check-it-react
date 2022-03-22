@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-function TaskList({ title, tasks }) {
+function TaskList({
+  title,
+  tasks,
+  removeTask,
+  updateTaskChecked,
+}) {
   return (
     <section className="tasks-section">
       <h2 className="tasks-section__title">{title}</h2>
@@ -11,10 +16,10 @@ function TaskList({ title, tasks }) {
         tasks.map((currentTask) => (
           <li className="tasks-section__item" key={currentTask.id}>
             <label className="tasks-section__item__label">
-              <input checked={currentTask.checked} className="tasks-section__item__checkbox" type="checkbox" />
+              <input checked={currentTask.checked} className="tasks-section__item__checkbox" type="checkbox" onChange={() => { updateTaskChecked(currentTask); }} />
               <span className="tasks-section__item__text">{currentTask.title}</span>
             </label>
-            <button type="button" className="tasks-section__item__remove">X</button>
+            <button type="button" className="tasks-section__item__remove" onClick={() => { removeTask(currentTask); }}>X</button>
           </li>
         ))
       }
@@ -24,6 +29,8 @@ function TaskList({ title, tasks }) {
 }
 
 TaskList.propTypes = {
+  removeTask: PropTypes.func.isRequired,
+  updateTaskChecked: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   tasks: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
